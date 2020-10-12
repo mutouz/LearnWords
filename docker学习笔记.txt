@@ -1,0 +1,28 @@
+docker 操作流程
+
+1. 下载镜像 docker pull nginx
+2. 查看镜像 docker images
+3. 运行镜像 （-v 是 挂载文件  -p 指定端口绑定绑定8099容器80 -d后台运行 --restart重新启动 nginx是镜像）
+docker run -d  --restart always -p 8099:80  --name mynginx \
+    -v  /${NGINX_DIR}/html:/usr/share/nginx/html  \
+    -v  /${NGINX_DIR}/conf.d:/etc/nginx/conf.d \
+    -v  /${NGINX_DIR}/config/nginx.conf:/etc/nginx/nginx.conf \
+    -v  /${NGINX_DIR}/logs:/var/log/nginx \
+    nginx
+4.  修改镜像  docker exec -i -t mynginx /bin/bash 
+5.  查看容器（运行中的镜像） docker ps
+6.  查看容器（运行中和停止的镜像） docker ps -a
+7.  停止运行的容器    docker stop mynginx
+8.  删除停止的容器     docker rm mynginx  
+9.  删除镜像（必须先停止容器删除）docker rmi nginx:latest  
+10.修改镜像（先启动为容器修改容器内容提交为镜像 -a 作者； -m 提示； 151bafa0f16f 容器id； mynginx:v1 镜像名称:tag）  docker commit -a "mutouz" -m "添加wim" 151bafa0f16f  mynginx:v1
+11.打包推送到docker hub 
+	（1）首先去docker hub 创建仓库
+	（2）给本地的docker打包   docker tag  076203589924 mutouz/mynginx:v1 （和仓库名保持一致）
+	（3）登录docker 账户 docker login
+	（4）推送docker docker push mutouz/mynginx:v1
+
+
+链接两个容器
+docker run -p 5601:5601 -d --link es2:elasticsearch          546992e7d032
+			  【运行的elasticsearch】  【镜像 kibana】
