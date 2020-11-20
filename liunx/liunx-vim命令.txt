@@ -1,0 +1,7 @@
+vim
+gg=G 格式
+u 回退
+ctr+r 回退回退
+dd删除一行
+
+netstat -nltp | grep dotnet

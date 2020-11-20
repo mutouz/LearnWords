@@ -1,0 +1,27 @@
+git branch
+//切换
+git checkout zjh
+//拉取创建
+git checkout -b zhanghanlun origin/zhanghanlun
+//合并分支
+git merge master
+https://gitee.com/danecc/outsourcing-management-page.git
+//git创建本地分支
+git branch dev-xxx
+git创建并切换到本地分支
+git checkout -b dev-xxx
+将本地分支提交到远程
+git push origin dev-xxx
+//排除项目
+git rm --cached .//src//shared//service-proxies//service-proxies.ts
+
+//忽略文件保持本地和仓库文件相互不修改
+git update-index --assume-unchanged test.txt
+git update-index --no-assume-unchanged /path/to/file  #恢复跟踪
+
+git ls-files -v | grep '^h\ ' 查看忽略文件
+提取文件路径，方法如下
+git ls-files -v | grep '^h\ ' | awk '{print $2}'
+
+所有被忽略的文件，取消忽略的方法，如下
+git ls-files -v | grep '^h' | awk '{print $2}' |xargs git update-index --no-assume-unchanged  
